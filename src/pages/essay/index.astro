@@ -10,15 +10,15 @@ const essays = (await getCollection('essay', ({ data }) => (prod ? data.draft !=
 ---
 
 <BaseLayout title="随笔">
-  <h1 class="page-title">随笔</h1>
-  <div class="page-meta">
-    随笔与杂记，共 {essays.length} 篇 · <a href="/essay/rss.xml">RSS</a>
+  <div class="page-header">
+    <h1 class="page-title">随笔</h1>
+    <span class="page-subtitle">随笔与杂记，共 {essays.length} 篇 · <a href="/essay/rss.xml">RSS</a></span>
   </div>
 
   <div class="list">
     {essays.map((e) => (
       <EssayCard
-        href={`/essay/${e.id}/`}
+        href={`/essay/${e.data.slug ?? e.id}/`}
         title={e.data.title}
         excerpt={e.data.description}
         date={e.data.date}

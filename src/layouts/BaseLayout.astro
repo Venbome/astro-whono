@@ -5,24 +5,54 @@ import '../styles/global.css';
 const {
   title,
   description,
+  image,
+  ogType = 'website',
+  bodyClass,
 } = Astro.props;
 
 const siteTitle = 'Whono';
 const fullTitle = title ? `${title} | ${siteTitle}` : siteTitle;
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : Astro.url.href;
+const ogImage = image
+  ? (Astro.site ? new URL(image, Astro.site).toString() : image)
+  : null;
 ---
 
 <!doctype html>
 <html lang="zh-CN">
   <head>
+    <script is:inline>
+      (() => {
+        const key = 'theme';
+        let stored = null;
+        try { stored = localStorage.getItem(key); } catch (_) {}
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = stored === 'dark' || stored === 'light' ? stored : (prefersDark ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" href="/fonts/LXGWWenKaiLite-Regular.woff2" as="font" type="font/woff2" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet" />
     <title>{fullTitle}</title>
     {description && <meta name="description" content={description} />}
+    <link rel="canonical" href={canonical} />
+    <meta property="og:site_name" content={siteTitle} />
+    <meta property="og:title" content={fullTitle} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content={ogType} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={fullTitle} />
+    {description && <meta name="twitter:description" content={description} />}
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
+    <slot name="head" />
   </head>
-  <body>
+  <body class={bodyClass}>
     <div class="shell">
       <Sidebar siteTitle={siteTitle} />
       <div class="divider" aria-hidden="true"></div>

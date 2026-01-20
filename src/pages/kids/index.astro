@@ -15,8 +15,11 @@ if (prod && entry.data.draft) {
 const { Content, headings } = await render(entry);
 
 // Build a grouped TOC: H2 as section titles, H3 as items.
-const groups = [];
-let current = null;
+type TocItem = { text: string; slug: string };
+type TocGroup = { title: string; items: TocItem[] };
+
+const groups: TocGroup[] = [];
+let current: TocGroup | null = null;
 for (const h of headings) {
   if (h.depth === 2) {
     current = { title: h.text, items: [] };
@@ -31,15 +34,41 @@ for (const h of headings) {
 }
 ---
 
-<BaseLayout title="孩童">
-  <div style="display:flex; align-items:baseline; gap:12px;">
-    <h1 class="page-title" style="margin:0;">{entry.data.title}</h1>
-    {entry.data.subtitle ? <span class="kids-subtitle">{entry.data.subtitle}</span> : null}
+<BaseLayout title="孩童" bodyClass="kids-page immersive-page">
+  <div class="page-header reader-exit-anchor">
+    <h1 class="page-title">{entry.data.title}</h1>
+    {entry.data.subtitle ? <span class="page-subtitle">{entry.data.subtitle}</span> : null}
+    <button
+      id="reader-exit"
+      class="icon-button reader-exit"
+      type="button"
+      aria-label="退出阅读模式"
+      title="退出阅读模式"
+    >
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path
+          d="M6 4.5h9a2.5 2.5 0 0 1 2.5 2.5V19"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M6 19V4.5M6 19h9"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </button>
   </div>
 
   <div class="intro">
-    我在一些笔记软件中记录着一个 “#孩子” 这样的标签，主要是仿照感恩日记，对生活可能被遗忘的美好做一些记录。
-    其中大部分内容回看的时候都能想起一些有趣的瞬间。
+    相册里堆叠着成长影像，但多年以后，最能让某个瞬间在记忆中浮现的，往往是当时记下的寥寥数语。
+    也许，对抗遗忘最好的方式，就是为那一刻的感受留下文字的印记。
   </div>
 
   <nav class="kids-toc" aria-label="目录">

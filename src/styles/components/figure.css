@@ -1,0 +1,25 @@
+.prose figure {
+  margin: 18px 0;
+}
+
+.prose figure > :is(img, picture) {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.prose figure > picture > img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.prose figure > figcaption {
+  margin-top: 6px;
+  text-align: center;
+  font-size: 0.9em;
+  font-family: "LXGW WenKai","Kaiti SC","STKaiti",serif;
+  color: var(--muted);
+}

@@ -7,7 +7,7 @@ const {
   author = 'Whono'
 } = Astro.props;
 
-const tagsText = (bit.data.tags ?? []).map((t) => `#${t}`).join(' ');
+const tagsText = (bit.data.tags ?? []).map((t: string) => `#${t}`).join(' ');
 
 // Used by the client-side search in /bits/
 const searchable = [

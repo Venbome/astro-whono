@@ -12,9 +12,9 @@ const groups = groupByYear(posts, (p) => p.data.date);
 ---
 
 <BaseLayout title="文章归档">
-  <h1 class="page-title">文章归档</h1>
-  <div class="page-meta">
-    全量文章列表，共 {posts.length} 篇文章 · <a href="/posts/rss.xml">RSS</a>
+  <div class="page-header">
+    <h1 class="page-title">文章归档</h1>
+    <span class="page-subtitle">共 {posts.length} 篇文章 · <a href="/posts/rss.xml">RSS</a></span>
   </div>
 
   {groups.map((g) => (
@@ -25,7 +25,7 @@ const groups = groupByYear(posts, (p) => p.data.date);
           <div class="archive-row">
             <div class="archive-date">{formatMonthDay(post.data.date)}</div>
             <div>
-              <a href={`/posts/${post.id}/`}>{post.data.title}</a>
+              <a href={`/posts/${post.data.slug ?? post.id}/`}>{post.data.title}</a>
             </div>
             <div class="archive-tag">{post.data.tags?.[0] ? `#${post.data.tags[0]}` : ''}</div>
           </div>

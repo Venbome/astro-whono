@@ -17,13 +17,12 @@ const rendered = await Promise.all(
 ---
 
 <BaseLayout title="生活小记">
-  <div class="bits-hero">
-    <h1>生活小记</h1>
-    <p>生活不需要长篇，记得就好。</p>
+  <div class="page-header">
+    <h1 class="page-title">生活小记</h1>
+    <span class="page-subtitle">生活不需要长篇，记得就好。</span>
   </div>
 
   <div class="bits-toolbar">
-    <h2>生活小记</h2>
     <div class="bits-controls">
       <input id="bits-search" type="search" placeholder="搜索小记..." autocomplete="off" />
       <button id="bits-search-btn" type="button">搜索</button>
@@ -38,11 +37,12 @@ const rendered = await Promise.all(
   </div>
 
   <script>
-    const input = document.getElementById('bits-search');
-    const btn = document.getElementById('bits-search-btn');
-    const cards = Array.from(document.querySelectorAll('[data-bit]'));
+    const input = document.getElementById('bits-search') as HTMLInputElement | null;
+    const btn = document.getElementById('bits-search-btn') as HTMLButtonElement | null;
+    const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-bit]'));
 
     function applyFilter() {
+      if (!input) return;
       const q = (input.value || '').trim().toLowerCase();
       for (const el of cards) {
         const hay = (el.getAttribute('data-search') || '').toLowerCase();
@@ -53,7 +53,7 @@ const rendered = await Promise.all(
     input?.addEventListener('input', applyFilter);
     btn?.addEventListener('click', applyFilter);
 
-    const newBtn = document.querySelector('[data-new-bit]');
+    const newBtn = document.querySelector<HTMLButtonElement>('[data-new-bit]');
     newBtn?.addEventListener('click', async () => {
       const cmd = 'npm run new:bit';
       try {

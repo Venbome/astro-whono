@@ -6,7 +6,7 @@ export async function getStaticPaths() {
   const prod = import.meta.env.PROD;
   const essays = await getCollection('essay', ({ data }) => (prod ? data.draft !== true : true));
   return essays.map((essay) => ({
-    params: { slug: essay.id },
+    params: { slug: essay.data.slug ?? essay.id },
     props: { essay }
   }));
 }

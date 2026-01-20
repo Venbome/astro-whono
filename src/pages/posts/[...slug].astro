@@ -6,7 +6,7 @@ export async function getStaticPaths() {
   const prod = import.meta.env.PROD;
   const posts = await getCollection('posts', ({ data }) => (prod ? data.draft !== true : true));
   return posts.map((post) => ({
-    params: { slug: post.id },
+    params: { slug: post.data.slug ?? post.id },
     props: { post }
   }));
 }

@@ -14,11 +14,14 @@ export async function GET(context) {
     title: 'Whono',
     description: 'Latest posts + essay',
     site: context.site,
-    items: merged.map(({ type, entry }) => ({
-      title: entry.data.title,
-      pubDate: entry.data.date,
-      description: entry.data.description,
-      link: type === 'posts' ? `/posts/${entry.id}/` : `/essay/${entry.id}/`
-    }))
+    items: merged.map(({ type, entry }) => {
+      const slug = entry.data.slug ?? entry.id;
+      return {
+        title: entry.data.title,
+        pubDate: entry.data.date,
+        description: entry.data.description,
+        link: type === 'posts' ? `/posts/${slug}/` : `/essay/${slug}/`
+      };
+    })
   });
 }

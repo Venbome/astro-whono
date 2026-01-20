@@ -8,14 +8,20 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
+    "check:callout": "node ./scripts/check-callout.mjs",
+    "ci": "npm run build && npm run check:callout && npm run check:figure --if-present",
     "new:bit": "node ./scripts/new-bit.mjs"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.6",
     "@astrojs/rss": "^4.0.12",
     "astro": "^5.16.9"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
-    "typescript": "^5.5.4"
+    "remark-directive": "^4.0.0",
+    "ttf2woff2": "^8.0.0",
+    "typescript": "^5.9.3",
+    "unist-util-visit": "^5.0.0"
   }
 }

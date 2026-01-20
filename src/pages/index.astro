@@ -31,7 +31,8 @@ const latest = merged.slice(0, 12);
 
   <div class="list">
     {latest.map(({ type, entry }) => {
-      const href = type === 'posts' ? `/posts/${entry.id}/` : `/essay/${entry.id}/`;
+      const slug = entry.data.slug ?? entry.id;
+      const href = type === 'posts' ? `/posts/${slug}/` : `/essay/${slug}/`;
       const tag = entry.data.tags?.[0];
       return (
         <EntryListItem
