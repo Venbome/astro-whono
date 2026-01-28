@@ -4,15 +4,29 @@ import { getPublished } from '../../lib/content';
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 
 export async function getStaticPaths() {
-  const posts = await getPublished('posts');
-  return posts.map((post) => ({
-    params: { slug: post.data.slug ?? post.id },
-    props: { post }
-  }));
+  const posts = await getPublished('posts', {
+    orderBy: (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+  });
+  return posts.map((post, index) => {
+    const prevEntry = posts.at(index - 1);
+    const nextEntry = posts.at(index + 1);
+    return {
+      params: { slug: post.data.slug ?? post.id },
+      props: {
+        post,
+        prev: prevEntry
+          ? { href: `/posts/${prevEntry.data.slug ?? prevEntry.id}/`, title: prevEntry.data.title }
+          : null,
+        next: nextEntry
+          ? { href: `/posts/${nextEntry.data.slug ?? nextEntry.id}/`, title: nextEntry.data.title }
+          : null
+      }
+    };
+  });
 }
 
-const { post } = Astro.props;
+const { post, prev, next } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<ArticleLayout entry={post} Content={Content} />
+<ArticleLayout entry={post} Content={Content} prev={prev} next={next} />

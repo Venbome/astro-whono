@@ -4,7 +4,7 @@
   --callout-line: var(--border);
 
   position: relative;
-  padding: 4px 0 4px 16px;
+  padding: 4px 0 4px var(--quote-pad);
   margin: 1rem 0;
   background: transparent;
   border: 0;
@@ -12,6 +12,7 @@
   box-shadow: none;
   font-family: "LXGW WenKai","Kaiti SC","STKaiti",serif;
 }
+
 
 .prose .callout::before {
   content: "";

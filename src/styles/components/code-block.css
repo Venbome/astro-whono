@@ -216,6 +216,28 @@ pre:is(.astro-code, .shiki) span[style*="--shiki-light"] {
   opacity: 1;
 }
 
+@media (max-width: 640px) {
+  .code-block .code-toolbar {
+    height: auto;
+    padding: 8px 12px;
+    flex-wrap: wrap;
+    row-gap: 6px;
+  }
+
+  .code-block .code-lang {
+    font-size: 12px;
+  }
+
+  .code-block .code-meta {
+    margin-left: auto;
+  }
+
+  .code-block .code-info,
+  .code-block .code-separator {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .code-block .code-lang-icon {
     transition: none;

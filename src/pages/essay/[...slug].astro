@@ -4,15 +4,29 @@ import { getPublished } from '../../lib/content';
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 
 export async function getStaticPaths() {
-  const essays = await getPublished('essay');
-  return essays.map((essay) => ({
-    params: { slug: essay.data.slug ?? essay.id },
-    props: { essay }
-  }));
+  const essays = await getPublished('essay', {
+    orderBy: (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+  });
+  return essays.map((essay, index) => {
+    const prevEntry = essays.at(index - 1);
+    const nextEntry = essays.at(index + 1);
+    return {
+      params: { slug: essay.data.slug ?? essay.id },
+      props: {
+        essay,
+        prev: prevEntry
+          ? { href: `/essay/${prevEntry.data.slug ?? prevEntry.id}/`, title: prevEntry.data.title }
+          : null,
+        next: nextEntry
+          ? { href: `/essay/${nextEntry.data.slug ?? nextEntry.id}/`, title: nextEntry.data.title }
+          : null
+      }
+    };
+  });
 }
 
-const { essay } = Astro.props;
+const { essay, prev, next } = Astro.props;
 const { Content } = await render(essay);
 ---
 
-<ArticleLayout entry={essay} Content={Content} typeLabel="随笔" />
+<ArticleLayout entry={essay} Content={Content} typeLabel="随笔" prev={prev} next={next} />

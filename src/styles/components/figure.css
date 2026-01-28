@@ -16,10 +16,29 @@
   margin: 0 auto;
 }
 
+@media (max-width: 900px) {
+  .prose figure > :is(img, picture) {
+    max-width: 92%;
+  }
+
+  .prose figure > picture > img {
+    max-width: 92%;
+  }
+}
+
 .prose figure > figcaption {
   margin-top: 6px;
   text-align: center;
   font-size: 0.9em;
+  max-width: min(100%, 32rem);
+  margin-left: auto;
+  margin-right: auto;
   font-family: "LXGW WenKai","Kaiti SC","STKaiti",serif;
   color: var(--muted);
+}
+
+@media (max-width: 900px) {
+  .prose figure > figcaption {
+    font-size: 0.85em;
+  }
 }

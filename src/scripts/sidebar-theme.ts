@@ -5,6 +5,15 @@ const body = document.body;
 const themeBtn = document.getElementById('theme-toggle');
 const readerBtn = document.getElementById('reader-toggle');
 const readerExit = document.getElementById('reader-exit');
+const mobileMq = window.matchMedia('(max-width: 900px)');
+
+const prefersReducedMotion = () =>
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const isLongPage = () =>
+  /^(?:\/(?:posts|essay|kids)(?:\/|$))/.test(window.location.pathname);
+
+let updateFloating = () => {};
 
 const isDark = () => root.dataset.theme === 'dark';
 
@@ -60,8 +69,107 @@ const applyReader = (on: boolean) => {
     readerBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
   }
   if (readerExit) {
-    readerExit.setAttribute('aria-label', '退出阅读模式');
+    readerExit.setAttribute('aria-label', '退出阅读');
+    readerExit.setAttribute('title', '退出阅读');
   }
+  setVisible(readerExit as HTMLElement | null, on);
+  updateFloating();
+};
+
+const createScrollTopButton = () => {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'icon-button float-action scroll-top';
+  button.setAttribute('aria-label', '回到顶部');
+  button.setAttribute('title', '回到顶部');
+  button.setAttribute('aria-hidden', 'true');
+  button.tabIndex = -1;
+  button.innerHTML = `
+    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M8 5l8 7-8 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="rotate(-90 12 12)" />
+    </svg>
+  `;
+  button.addEventListener('click', () => {
+    const behavior = prefersReducedMotion() ? 'auto' : 'smooth';
+    window.scrollTo({ top: 0, behavior });
+  });
+  return button;
+};
+
+const setVisible = (el: HTMLElement | null, visible: boolean) => {
+  if (!el) return;
+  if (visible) {
+    el.dataset.visible = 'true';
+    el.removeAttribute('aria-hidden');
+    el.tabIndex = 0;
+  } else {
+    delete el.dataset.visible;
+    el.setAttribute('aria-hidden', 'true');
+    el.tabIndex = -1;
+  }
+};
+
+const initFloatingActions = () => {
+  if (!isLongPage()) return;
+
+  let scrollTopBtn: HTMLButtonElement | null = null;
+  let threshold = Math.max(600, window.innerHeight * 2);
+  let ticking = false;
+
+  const ensureScrollTop = () => {
+    if (scrollTopBtn || !body) return;
+    scrollTopBtn = createScrollTopButton();
+    body.appendChild(scrollTopBtn);
+  };
+
+  const updateThreshold = () => {
+    threshold = Math.max(600, window.innerHeight * 2);
+  };
+
+  const update = () => {
+    const y = window.scrollY || document.documentElement.scrollTop || 0;
+    const scrolledPast = y >= threshold;
+    const isReading = isReaderOn();
+    const floatExit = isReading && mobileMq.matches && scrolledPast;
+
+    if (mobileMq.matches) {
+      ensureScrollTop();
+      if (scrollTopBtn) {
+        scrollTopBtn.dataset.stack = floatExit ? 'true' : 'false';
+      }
+      setVisible(scrollTopBtn, scrolledPast);
+    } else {
+      setVisible(scrollTopBtn, false);
+    }
+
+    if (readerExit) {
+      if (floatExit) {
+        readerExit.classList.add('float-action');
+      } else {
+        readerExit.classList.remove('float-action');
+      }
+    }
+  };
+
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(() => {
+      update();
+      ticking = false;
+    });
+  };
+
+  const onResize = () => {
+    updateThreshold();
+    update();
+  };
+
+  updateFloating = update;
+  mobileMq.addEventListener('change', update);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onResize);
+  update();
 };
 
 const initReader = () => {
@@ -84,4 +192,5 @@ const initReader = () => {
 };
 
 initTheme();
+initFloatingActions();
 initReader();

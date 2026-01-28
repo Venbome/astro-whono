@@ -2,6 +2,8 @@
 .prose {
   font-size: 15px;
   color: var(--text);
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .prose img {
@@ -9,6 +11,18 @@
   height: auto;
   display: block;
   margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+  .prose img {
+    max-width: 92%;
+  }
+}
+
+@media (max-width: 640px) {
+  .prose img {
+    max-width: 100%;
+  }
 }
 
 .prose h1 {
@@ -32,7 +46,7 @@
 
 .prose blockquote {
   margin: 1.2rem 0;
-  padding: 0.75rem 1rem;
+  padding: 0.75rem var(--quote-pad);
 
   & p {
     margin: 0;
@@ -57,6 +71,16 @@
   font-style: normal;
   padding: 1.0rem 1.6rem 0.5rem 1.8rem;
   box-shadow: 0 1px 2px var(--border);
+}
+
+@media (max-width: 900px) {
+  .prose blockquote {
+    padding: 0.65rem var(--quote-pad);
+  }
+
+  .prose blockquote.pullquote {
+    padding: 0.9rem 1.35rem 0.5rem 1.55rem;
+  }
 }
 
 @supports (background: color-mix(in oklab, black, white)) {
@@ -113,6 +137,7 @@
   border-radius: 10px;
   border: 1px solid var(--border);
   background: var(--code-content-bg);
+  max-width: 100%;
 }
 
 .prose pre code {
@@ -170,4 +195,12 @@
 
 .prose a {
   border-bottom-color: currentColor;
+}
+
+.prose table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  -webkit-overflow-scrolling: touch;
 }

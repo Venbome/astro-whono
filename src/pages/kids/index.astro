@@ -42,8 +42,10 @@ for (const h of headings) {
       id="reader-exit"
       class="icon-button reader-exit"
       type="button"
-      aria-label="退出阅读模式"
-      title="退出阅读模式"
+      aria-label="退出阅读"
+      title="退出阅读"
+      aria-hidden="true"
+      tabindex="-1"
     >
       <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
         <path
@@ -83,8 +85,10 @@ for (const h of headings) {
   </div>
 
   <div class="intro">
-    相册里堆叠着成长影像，但多年以后，最能让某个瞬间在记忆中浮现的，往往是当时记下的寥寥数语。
-    也许，对抗遗忘最好的方式，就是为那一刻的感受留下文字的印记。
+    时间流经我们，如同风穿过回廊。
+    <br />总有一些瞬间，携带着特别的气息或光亮，短暂停留后便消散。
+    <br />有些感受，无法被镜头承载，有些记忆难以被影像收藏。
+    <br />也许，为瞬间的感受留下一份文字备份，正是抵抗遗忘最温柔却最有效的方式。
   </div>
 
   <nav class="kids-toc" aria-label="目录">
@@ -108,4 +112,23 @@ for (const h of headings) {
   <div class="kids-content prose">
     <Content />
   </div>
+
+  <script is:inline>
+    (() => {
+      const mq = window.matchMedia('(max-width: 640px)');
+      const sync = () => {
+        if (mq.matches) {
+          document.querySelectorAll('.kids-toc details[open]').forEach((el) => {
+            el.removeAttribute('open');
+          });
+        } else {
+          document.querySelectorAll('.kids-toc details:not([open])').forEach((el) => {
+            el.setAttribute('open', '');
+          });
+        }
+      };
+      sync();
+      mq.addEventListener('change', sync);
+    })();
+  </script>
 </BaseLayout>

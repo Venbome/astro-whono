@@ -111,13 +111,22 @@ btn?.addEventListener('click', () => {
 });
 
 const newBtn = document.querySelector<HTMLButtonElement>('[data-new-bit]');
+const newLabel = newBtn?.querySelector<HTMLElement>('.new-label');
+const setNewLabel = (text: string) => {
+  if (newLabel) {
+    newLabel.textContent = text;
+  } else if (newBtn) {
+    newBtn.textContent = text;
+  }
+  newBtn?.setAttribute('aria-label', text);
+};
 newBtn?.addEventListener('click', async () => {
   const cmd = 'npm run new:bit';
   try {
     await navigator.clipboard.writeText(cmd);
-    newBtn.textContent = '已复制命令';
+    setNewLabel('已复制命令');
     window.setTimeout(() => {
-      newBtn.textContent = '✍ 写小记';
+      setNewLabel('写小记');
     }, 1200);
   } catch {
     alert(`在项目根目录运行：\n\n${cmd}`);

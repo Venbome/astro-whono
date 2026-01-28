@@ -1,0 +1,264 @@
+/* Bits
+   只包含 /bits/ 页面相关样式，避免干扰通用列表。
+*/
+
+/* Bits（小记） */
+
+.bits-toolbar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 8px;
+  /* border removed */
+  padding-bottom: 0;
+  margin: 9px 0 4px;
+}
+
+.bits-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-right: env(safe-area-inset-right);
+  --bits-control-h: 34px;
+}
+
+.bits-search {
+  display: flex;
+  align-items: center;
+  flex: 1 1 220px;
+  min-width: 180px;
+  max-width: 360px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  height: var(--bits-control-h);
+}
+
+.bits-search input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100%;
+  padding: 0 10px;
+  border: 0;
+  background: transparent;
+  font-size: 13px;
+  outline: none;
+  line-height: 1;
+}
+
+.bits-search-btn {
+  flex: 0 0 auto;
+  height: 100%;
+  margin: 0;
+  padding: 0 14px;
+  min-width: 56px;
+  border-radius: 0 6px 6px 0;
+  border: 0;
+  border-left: 1px solid var(--border);
+  background: var(--panel);
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+:root[data-theme="dark"] .bits-search-btn {
+  color: #f0f0f0;
+}
+
+.bits-controls > button {
+  flex: 0 0 auto;
+  height: var(--bits-control-h);
+  padding: 0 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: #fff;
+  font-size: 13px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+:root[data-theme="dark"] .bits-controls > button {
+  background: #222;
+  border-color: #4b4b4b;
+  color: #f0f0f0;
+}
+
+.bits-controls > button.new {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #111;
+  background: #111;
+  color: #fff;
+}
+
+:root[data-theme="dark"] .bits-controls > button.new {
+  color: var(--text);
+  border-color: var(--border);
+  background: var(--panel);
+}
+
+.bits-status {
+  min-height: 4px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.bit-card {
+  padding: 18px 18px 14px;
+  border: 0;
+  border-radius: 10px;
+  margin: 16px 0;
+  background: var(--panel);
+}
+
+@supports (background: color-mix(in srgb, #000 50%, #fff 50%)) {
+  .bit-card {
+    background: color-mix(in srgb, var(--panel) 38%, var(--bg));
+  }
+}
+
+.bit-author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: #111;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+.bit-author .name {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.bit-body {
+  font-size: 14px;
+}
+
+.bit-media {
+  margin: 12px 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 0;
+  max-width: 320px;
+}
+
+.bit-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--faint);
+}
+
+.bit-tags {
+  color: #d34;
+}
+
+@media (min-width: 641px) and (max-width: 900px) {
+  .bit-body picture,
+  .bit-body img {
+    display: block;
+    max-width: 360px;
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media (max-width: 900px) {
+  .bits-toolbar {
+    align-items: flex-start;
+    margin: 10px 0 4px;
+    padding-bottom: 2px;
+  }
+
+  .bits-controls {
+    width: 100%;
+    --bits-control-h: 34px;
+  }
+
+  .bits-status {
+    min-height: 2px;
+  }
+
+  .bits-search {
+    flex: 1 1 auto;
+  }
+
+  .bits-controls > button {
+    min-height: var(--bits-control-h);
+  }
+
+  .bit-media {
+    max-width: 320px;
+  }
+
+  .bit-meta {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6px;
+    flex-wrap: nowrap;
+  }
+
+  .bit-meta > :last-child {
+    order: 1;
+    white-space: nowrap;
+  }
+
+  .bit-meta .bit-tags {
+    order: 2;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .bit-meta .bit-tags::before {
+    content: " - ";
+    color: var(--faint);
+  }
+
+  .bit-meta .bit-tags:empty {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .bits-controls {
+    gap: 6px;
+  }
+
+  .bits-search {
+    flex-basis: 160px;
+    min-width: 0;
+  }
+
+  .bits-controls > button.new {
+    padding: 0 8px;
+  }
+
+  .bit-media {
+    max-width: 100%;
+  }
+}

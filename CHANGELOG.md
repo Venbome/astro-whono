@@ -6,6 +6,11 @@ The format is based on Keep a Changelog, and this project aims to follow Semanti
 
 ## [Unreleased]
 ### Added
+### Changed
+### Fixed
+
+## [0.1.0] - 2026-01-28 (Pre-release)
+### Added
 - 代码块顶部工具栏：显示语言类型、行数、UTF-8 编码提示与复制按钮
 - 引入 callout 语法糖解析管线：`remark-directive` + `remark-callout`
 - 新增 `src/plugins/remark-callout.mjs`，将 `:::type[title]` 转换为 callout DOM 协议
@@ -18,6 +23,8 @@ The format is based on Keep a Changelog, and this project aims to follow Semanti
 - 新增客户端交互脚本目录 `src/scripts/`（bits 搜索、侧栏主题/阅读模式）
 - 新增 bits 搜索索引端点 `/bits/index.json`（静态生成，可缓存）
 - bits 搜索新增状态提示（aria-live）与降级提示
+- 移动端/平板新增右下角回到顶部按钮（滚动阈值显示，JS 渐进增强）
+- 文章详情新增上下篇导航（仅在同栏目内按日期排序）
 
 ### Changed
 - 代码块颜色变量体系重构：新增 `--code-header-bg`、`--code-content-bg`、`--code-border`、`--code-text`、`--code-action-hover-bg`；旧 `--code-bg` 保留为兼容别名
@@ -46,12 +53,31 @@ The format is based on Keep a Changelog, and this project aims to follow Semanti
 - 非沉浸页阅读模式按钮改为禁用并提示
 - bits 搜索索引从 HTML 移出，改为 JSON 懒加载
 - bits 搜索索引加入纯文本摘要（截断）以支持关键词检索
+- 移动端断点分档：≤900 通用移动化，641–900 平板微调，≤640 手机紧凑
+- 移动端导航/列表/Bits 控件/页头布局调整，减少溢出与错位
+- 移动端 `.prose img` 放宽到 92–100%，代码块工具栏在手机端允许换行并隐藏次要信息
+- 移动端触控命中区提升（44px）与安全区内边距适配（sidebar/content）
+- 列表/卡片密度与页头节奏轻量收紧，引用与 callout 内边距在移动端更紧凑
+- 移动端导航当前页提示增强（下划线更显眼），代码块工具栏语言标签字号下调
+- figcaption 最大宽度约束（32rem）并在移动端略微缩小字号
+- 移动端细节尺寸抽象为 CSS 变量（`--tap-min-h` / `--pad-x` / `--card-pad` / `--quote-pad` / `--header-gap`）
+- bits 工具条布局与间距调整：搜索/按钮同一行、控件高度统一、留白更紧凑
+- posts 归档移动端改为标题下方同一行展示完整日期与标签，并优化条目间距
+- kids 目录在 ≤640 改为 3 列，并随断点自动折叠/展开
+- 拆分 `global.css`：新增 layout/lists/bits 组件样式文件，仍以 `global.css` 为唯一入口
+- 调整 `global.css` 的 `@import` 顺序（layout → lists → bits → prose → figure → callout → code-block）
+- Kids TOC 监听改用 `matchMedia.addEventListener`；复制按钮兜底收敛为兼容路径
+- bits 图片在平板宽度限制最大宽度，避免撑满卡片容器
+- 移动端与平板页首留白收紧（sidebar/content 顶部 padding 下调）
+- 阅读模式退出按钮在移动端滚动超阈值时切换为浮层，阈值内保留原位入口
+- 平板端 figure/picture 图片统一收紧到 92% 宽度
 
 ### Fixed
 - 修复暗色模式下纯文本代码块（无 token span）文字不可读的问题
 - 修复代码块语言图标 viewBox 计算错误导致的裁切/缩放异常
 - 修复阅读模式退出按钮在正文标题下方错位的问题
 - 修复行内代码换行导致背景/边框断裂的问题
+- 修复小屏下长行内容撑宽导致页面横向滚动与正文截断的问题
 
 ## Pre-release（未发布历史）
 
