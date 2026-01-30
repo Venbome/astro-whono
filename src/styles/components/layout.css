@@ -296,6 +296,7 @@
   display: block;
   font-size: 13px;
   color: var(--muted);
+  width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

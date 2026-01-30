@@ -1,19 +1,20 @@
 # astro-whono
 
-![CI](https://github.com/cxro/astro-whono/actions/workflows/ci.yml/badge.svg?style=flat&color=9b7ba8)
+[![CI](https://img.shields.io/github/actions/workflow/status/cxro/astro-whono/ci.yml?branch=main&style=for-the-badge&label=CI&labelColor=2E3440&color=A3BE8C&logo=githubactions&logoColor=ECEFF4)](https://github.com/cxro/astro-whono/actions/workflows/ci.yml?query=branch%3Amain)
+[![Node](https://img.shields.io/github/package-json/node-version/cxro/astro-whono?style=for-the-badge&label=Node&labelColor=2E3440&color=81A1C1&logo=nodedotjs&logoColor=ECEFF4)](https://github.com/cxro/astro-whono#%E7%8E%AF%E5%A2%83%E8%A6%81%E6%B1%82)
+[![Astro](https://img.shields.io/github/package-json/dependency-version/cxro/astro-whono/astro?style=for-the-badge&label=Astro&labelColor=2E3440&color=BC52EE&logo=astro&logoColor=ECEFF4)](https://docs.astro.build/)
+[![License](https://img.shields.io/github/license/cxro/astro-whono?style=for-the-badge&label=License&labelColor=2E3440&color=4C566A&logo=opensourceinitiative&logoColor=ECEFF4)](https://github.com/cxro/astro-whono/blob/main/LICENSE)
 
 一个极简双栏的 Astro 主题，用于个人写作与轻量内容发布。
-
-> 仓库目标：**clone 即用**、结构清晰、默认配置开箱可跑。
 
 ---
 
 ## 预览
 
-- 在线演示：<https://astro.whono.me>
-
-![浅色预览](public/preview-light.png)
-![深色预览](public/preview-dark.png)
+<p align="center">
+  <img src="public/preview-light.png" width="49%" alt="浅色预览" />
+  <img src="public/preview-dark.png" width="49%" alt="深色预览" />
+</p>
 
 ---
 
@@ -52,7 +53,7 @@ npm run build && npm run preview
 
 ---
 
-## 工程入口（权威）
+## 项目入口
 
 - 站点配置：`site.config.mjs`
 - 内容集合：`src/content.config.ts`
