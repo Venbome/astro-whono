@@ -90,6 +90,20 @@ npm run build && npm run preview
 - 内容集合：`src/content.config.ts`
 - 样式入口：`src/styles/global.css`
 
+## 作者信息（头像/用户名，仅用于 /bits/ 页面）
+
+- 默认作者与头像配置在 `site.config.mjs`：`site.author` / `site.authorAvatar`
+- `authorAvatar` 仅写相对路径（不带 `public/`、不带前导 `/`），例如：`author/avatar.webp`
+- 单条 bits 可在 frontmatter 用 `author` 覆盖：
+
+```yaml
+author:
+  name: Alice
+  avatar: author/alice.webp
+```
+
+- 头像图片缺失或加载失败时，会自动回退到首字母头像
+
 
 ## 内容与路由
 
@@ -128,6 +142,8 @@ images:                         # 可选：多图（自动读取图片尺寸，�
     height: 800
 # draft: true   # 可选：草稿；线上/预览默认不显示
 ```
+
+作者信息默认来自 `site.config.mjs`，可在单条 bits 中用 `author` 覆盖。
 
 
 ## 摘要与描述（description）

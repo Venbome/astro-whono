@@ -22,6 +22,8 @@ const linkBtn = toolbar?.querySelector<HTMLButtonElement>('[data-action="link"]'
 const contentEl = dialog?.querySelector<HTMLTextAreaElement>('#bits-draft-content') ?? null;
 const tagsEl = dialog?.querySelector<HTMLInputElement>('#bits-draft-tags') ?? null;
 const placeEl = dialog?.querySelector<HTMLInputElement>('#bits-draft-place') ?? null;
+const authorNameEl = dialog?.querySelector<HTMLInputElement>('#bits-draft-author-name') ?? null;
+const authorAvatarEl = dialog?.querySelector<HTMLInputElement>('#bits-draft-author-avatar') ?? null;
 const imagesWrap = dialog?.querySelector<HTMLElement>('[data-bits-images]') ?? null;
 const imageAddBtn = dialog?.querySelector<HTMLButtonElement>('[data-bits-image-add]') ?? null;
 const imageTemplate = dialog?.querySelector<HTMLTemplateElement>('[data-bits-image-template]') ?? null;
@@ -294,6 +296,9 @@ const normalizeImage = (value: string) => {
   return normalized;
 };
 
+const normalizeAuthorName = (value: string) => value.trim();
+const normalizeAuthorAvatar = (value: string) => normalizeImage(value);
+
 const resolveImageUrl = (value: string) => {
   const trimmed = value.trim();
   if (!trimmed) return '';
@@ -492,6 +497,12 @@ const buildMarkdown = () => {
     tags = tags.filter((tag) => !tag.trim().toLowerCase().startsWith('loc:'));
     tags.unshift(`loc:${placeValue}`);
   }
+  const authorNameDefault = normalizeAuthorName(authorNameEl?.defaultValue ?? '');
+  const authorAvatarDefault = normalizeAuthorAvatar(authorAvatarEl?.defaultValue ?? '');
+  const authorNameValue = normalizeAuthorName(authorNameEl?.value ?? '');
+  const authorAvatarValue = normalizeAuthorAvatar(authorAvatarEl?.value ?? '');
+  const authorChanged = authorNameValue !== authorNameDefault || authorAvatarValue !== authorAvatarDefault;
+  const shouldWriteAuthor = authorChanged && (authorNameValue || authorAvatarValue);
   const lines: string[] = ['---', `date: ${formatDateLocal()}`];
 
   if (tags.length) {
@@ -499,6 +510,12 @@ const buildMarkdown = () => {
     tags.forEach((tag) => {
       lines.push(`  - ${formatTag(tag)}`);
     });
+  }
+
+  if (shouldWriteAuthor) {
+    lines.push('author:');
+    if (authorNameValue) lines.push(`  name: ${formatTag(authorNameValue)}`);
+    if (authorAvatarValue) lines.push(`  avatar: ${formatTag(authorAvatarValue)}`);
   }
 
   if (draftEl?.checked) {

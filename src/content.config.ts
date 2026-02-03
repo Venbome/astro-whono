@@ -24,6 +24,11 @@ const bitsImage = z.object({
   alt: z.string().optional()
 });
 
+const bitsAuthor = z.object({
+  name: z.string().optional(),
+  avatar: z.string().optional()
+});
+
 const essay = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/essay' }),
   schema: z.object({
@@ -45,7 +50,8 @@ const bits = defineCollection({
     slug: z.string().optional(),
 
     // Optional media for card display.
-    images: z.array(bitsImage).optional()
+    images: z.array(bitsImage).optional(),
+    author: bitsAuthor.optional()
   })
 });
 

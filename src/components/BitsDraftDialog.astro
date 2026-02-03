@@ -1,4 +1,5 @@
 ---
+import { site } from '../../site.config.mjs';
 ---
 <dialog class="bits-draft-dialog" id="bits-draft-dialog" aria-labelledby="bits-draft-title">
   <form class="bits-draft-form" data-bits-draft-form>
@@ -98,6 +99,39 @@
         </label>
         <input id="bits-draft-place" name="place" type="text" inputmode="text" placeholder="例如:上海" />
         <div class="bits-draft-help">生成 tags 里的 loc:&lt;地点&gt;</div>
+      </div>
+    </div>
+
+    <div class="bits-draft-row">
+      <div class="bits-draft-field bits-draft-half">
+        <label for="bits-draft-author-name" class="bits-draft-label">
+          <span class="bits-draft-label-icon" aria-hidden="true">👤</span>
+          作者名（可选）
+        </label>
+        <input
+          id="bits-draft-author-name"
+          name="author-name"
+          type="text"
+          inputmode="text"
+          placeholder="例如：Whono"
+          value={site.author ?? ''}
+        />
+        <div class="bits-draft-help">留空则使用全站默认</div>
+      </div>
+      <div class="bits-draft-field bits-draft-half">
+        <label for="bits-draft-author-avatar" class="bits-draft-label">
+          <span class="bits-draft-label-icon" aria-hidden="true">🖼️</span>
+          头像（可选）
+        </label>
+        <input
+          id="bits-draft-author-avatar"
+          name="author-avatar"
+          type="text"
+          inputmode="url"
+          placeholder="author/avatar.webp 或 https://..."
+          value={site.authorAvatar ?? ''}
+        />
+        <div class="bits-draft-help">不写 public/，支持绝对 URL</div>
       </div>
     </div>
 

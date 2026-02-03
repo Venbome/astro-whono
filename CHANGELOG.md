@@ -10,11 +10,14 @@ The format is based on Keep a Changelog, and this project aims to follow Semanti
 - 新增 `netlify.toml` 固化 Netlify 构建与发布参数
 - README 一键部署增加部署后检查清单
 - 新增 `tools/charset-base.txt`（3500 常用字基础表）
+- site.config 新增 `authorAvatar`，作为 bits 默认头像入口
 - essay 新增 `archive` 字段（默认 true），用于控制是否进入归档与归档 RSS
 - 新增 sitemap 生成（`@astrojs/sitemap`），仅在设置 `SITE_URL` 时启用
 - 新增构建期 `robots.txt`（`src/pages/robots.txt.ts`），仅在设置 `SITE_URL` 时输出 `Sitemap:` 行
 - 新增 bits 轻量图片预览 dialog（为后续 lightbox 升级预留）
 - 新增 bits Markdown 语法演示动态（用于展示常用写法）
+- bits 支持 `author` 覆盖（`name`/`avatar`）
+- bits 草稿生成器新增作者名/头像输入（默认用全站配置，未改动不写入）
 ### Changed
 - 构建时强制内联样式表（`inlineStylesheets: 'always'`），减少首屏阻塞 CSS
 - `SITE_URL` 缺失时不再输出 canonical/og:url（避免相对 URL 被判错）
@@ -43,6 +46,8 @@ The format is based on Keep a Changelog, and this project aims to follow Semanti
 - bits 移动端多图改为 2×2 方形网格（1:1），取消首图全宽
 - bits 平板多图改为横向滑动泳道，展示全部图片并露出下一张提示
 - bits 标签输出拆分为独立 token，便于拉开标签间距
+- bits 头像渲染支持图片/文字兜底，加载失败自动回退首字母
+- bits 头像尺寸调整为 32px
 - 桌面端灯箱移除白底卡片，控件与分页器固定到视窗边缘
 - 首页 Hero 图改为本地 `astro:assets` 图片输出，新增多格式（AVIF/WebP）与更精确 sizes；LCP 优先级由 `isLCP` 控制
 - LXGW WenKai Lite 字体改为三段子集（latin/common/ext）并使用 unicode-range 按需加载，移除大字体 preload；新增字体构建脚本与可提交子集文件

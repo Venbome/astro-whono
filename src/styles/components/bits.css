@@ -133,15 +133,42 @@
 }
 
 .avatar {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   border-radius: 999px;
-  background: #111;
-  color: #fff;
+  box-sizing: border-box;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
+  font-size: 13px;
+  position: relative;
+}
+
+.avatar--image {
+  background: transparent;
+}
+
+.avatar-fallback {
+  position: absolute;
+  inset: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #111;
+  color: #fff;
+  opacity: 0;
+}
+
+.avatar.is-fallback .avatar-fallback {
+  opacity: 1;
+}
+
+.avatar img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .bit-author .name {
