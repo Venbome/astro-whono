@@ -77,18 +77,12 @@ const applyReader = (on: boolean) => {
 };
 
 const createScrollTopButton = () => {
-  const button = document.createElement('button');
-  button.type = 'button';
-  button.className = 'icon-button float-action scroll-top';
-  button.setAttribute('aria-label', '回到顶部');
-  button.setAttribute('title', '回到顶部');
-  button.setAttribute('aria-hidden', 'true');
-  button.tabIndex = -1;
-  button.innerHTML = `
-    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <path d="M8 5l8 7-8 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="rotate(-90 12 12)" />
-    </svg>
-  `;
+  const template = document.getElementById('scroll-top-template');
+  if (!(template instanceof HTMLTemplateElement)) return null;
+
+  const button = template.content.firstElementChild?.cloneNode(true);
+  if (!(button instanceof HTMLButtonElement)) return null;
+
   button.addEventListener('click', () => {
     const behavior = prefersReducedMotion() ? 'auto' : 'smooth';
     window.scrollTo({ top: 0, behavior });
@@ -118,7 +112,9 @@ const initFloatingActions = () => {
 
   const ensureScrollTop = () => {
     if (scrollTopBtn || !body) return;
-    scrollTopBtn = createScrollTopButton();
+    const nextButton = createScrollTopButton();
+    if (!nextButton) return;
+    scrollTopBtn = nextButton;
     body.appendChild(scrollTopBtn);
   };
 

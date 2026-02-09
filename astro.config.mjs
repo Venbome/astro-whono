@@ -19,6 +19,7 @@ const sanitizeSchema = {
   ...defaultSchema,
   tagNames: [
     ...(defaultSchema.tagNames ?? []),
+    'cite',
     'figure',
     'figcaption',
     'picture',

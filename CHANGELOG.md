@@ -5,7 +5,9 @@ All notable changes to this project will be documented in this file.
 The format is based on Keep a Changelog, and this project aims to follow Semantic Versioning.
 
 
-## [Unreleased] 
+## [Unreleased]
+
+## [0.1.1] - 2026-02-07
 ### Added
 - 新增 `public/_headers`（Cloudflare Pages 安全响应头基线：CSP/Referrer-Policy/X-Content-Type-Options/Permissions-Policy/HSTS）
 - 新增 `netlify.toml` 固化 Netlify 构建与发布参数
@@ -18,6 +20,10 @@ The format is based on Keep a Changelog, and this project aims to follow Semanti
 - 新增 `/archive/index.json` 与 `/essay/index.json` 静态搜索索引端点（构建期生成，可缓存）
 - 新增 `src/scripts/entry-search.ts`，用于 archive/essay 懒加载索引搜索
 ### Changed
+- 图标体系统一：`src/components/Icon.astro` 扩展并覆盖侧栏、阅读按钮、列表页与 `BitsDraftDialog` 常用图标，清理组件内联 SVG
+- 浮层回顶按钮改为模板克隆：`src/layouts/BaseLayout.astro` 新增 `#scroll-top-template`，`src/scripts/sidebar-theme.ts` 改为克隆模板并绑定行为，移除 `innerHTML` 拼接 SVG
+- 依赖治理优化：`@astrojs/check` 调整为 `devDependencies`，并新增 `overrides` 锁定 `fast-xml-parser`/`tar` 安全版本
+- 新增 `npm run audit:prod`（`npm audit --omit=dev --audit-level=high`）并接入 GitHub Actions CI
 - Markdown 渲染链路新增 `rehype-raw` + `rehype-sanitize`（含 allowlist），在保留 callout/gallery/code-block 等结构前提下补齐 XSS 防护
 - /bits 列表渲染改为按正文长度分流：清洗后 `<=180` 字保留原 Markdown 结构渲染，`>180` 字显示摘要文本
 - archive/essay 列表页与分页页复用 `src/lib/content.ts` 公共工具（`createWithBase`、`getPageSlice`、`getTotalPages`、`buildPaginatedPaths` 等）
@@ -26,8 +32,6 @@ The format is based on Keep a Changelog, and this project aims to follow Semanti
 - 构建时强制内联样式表（`inlineStylesheets: 'always'`），减少首屏阻塞
 - `SITE_URL` 缺失时不输出 canonical/og:url，并补充生产警告与部署说明
 - bits 灯箱复用通用控制器并统一样式入口（新增 `lightbox.css`）
-- 文档更新：Callout 说明/示例
-- README/开源元信息/页脚年份/内部链接 base-aware 等基础配置更新
 - 可访问性增强：skip link、`sr-only` 标题、`:focus-visible`、/bits 搜索 label
 - bits 图片字段升级为 `images[]`（Breaking：移除旧字段），并重做草稿录入与多图展示策略
 - bits 多图展示与交互优化（缩略比例、`+N` 标签、移动端网格、平板泳道等）

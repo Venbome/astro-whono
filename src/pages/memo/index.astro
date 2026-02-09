@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
 import Lightbox from '../../components/Lightbox.astro';
 import { getEntry, render } from 'astro:content';
 
@@ -52,40 +53,7 @@ for (const h of headings) {
       aria-hidden="true"
       tabindex="-1"
     >
-      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-        <path
-          d="M6 4.5h9a2.5 2.5 0 0 1 2.5 2.5V19"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.6"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-        <path
-          d="M6 19V4.5M6 19h9"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.6"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-        <path
-          d="M14.2 12H10.6"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.6"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-        <path
-          d="M10.6 12l2-2M10.6 12l2 2"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.6"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
+      <Icon name="reader-exit" class="icon" />
     </button>
   </div>
 

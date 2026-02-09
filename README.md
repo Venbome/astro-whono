@@ -4,6 +4,11 @@
 
 一个极简双栏的 Astro 主题，用于个人写作与轻量内容发布。
 
+## 链接
+
+- 在线演示：<https://astro.whono.me>
+- 仓库地址：<https://github.com/cxro/astro-whono>
+
 
 ## 预览
 
@@ -34,6 +39,8 @@
 
 ```bash
 npm i
+# 可重复安装（推荐 CI/排障时使用）
+# npm ci
 npm run dev
 npm run build && npm run preview
 ```
@@ -51,6 +58,8 @@ npm run build && npm run preview
 ### 常用命令
 
 - `npm run check`
+- `npm run ci`
+- `npm run audit:prod`
 - `npm run new:bit`
 - `npm run font:build`
 
@@ -60,6 +69,9 @@ npm run build && npm run preview
 ### 一键部署
 
 [![Deploy to Vercel](https://img.shields.io/badge/Deploy-Vercel-000000?style=flat&logo=vercel&logoColor=white)](https://vercel.com/new/clone?repository-url=https://github.com/cxro/astro-whono)&nbsp;&nbsp;[![Deploy to Netlify](https://img.shields.io/badge/Deploy-Netlify-00C7B7?style=flat&logo=netlify&logoColor=white)](https://app.netlify.com/start/deploy?repository=https://github.com/cxro/astro-whono)&nbsp;&nbsp;[![Deploy to Cloudflare Pages](https://img.shields.io/badge/Deploy-Cloudflare%20Pages-F38020?style=flat&logo=cloudflare&logoColor=white)](https://dash.cloudflare.com/?to=/:account/workers-and-pages)
+
+> 建议在生产环境设置：SITE_URL=https://你的域名（不要以 / 结尾）。
+> 未设置时会使用占位地址，页面可访问，但分享与收录相关链接可能不完整。
 
 <details>
   <summary><strong>Cloudflare Pages 部署（手动导入仓库）</strong></summary>
@@ -243,6 +255,16 @@ HTML 示例：
 
 欢迎创建 Issue 来报告问题或提出想法。
 欢迎提交 Pull Request 参与开发，建议从 feature/* 分支发起。
+
+### Fork 同步上游
+
+```bash
+git remote add upstream https://github.com/cxro/astro-whono.git
+git fetch upstream --tags
+git checkout main
+git merge upstream/main
+git push origin main --tags
+```
 
 
 ## 致谢

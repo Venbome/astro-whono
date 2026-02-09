@@ -1,4 +1,5 @@
 ---
+import Icon from './Icon.astro';
 import { site } from '../../site.config.mjs';
 ---
 <dialog
@@ -12,10 +13,7 @@ import { site } from '../../site.config.mjs';
     <div class="bits-draft-head">
       <h2 id="bits-draft-title">
         <span class="bits-draft-title-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <path d="M12 20h9" />
-            <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
-          </svg>
+          <Icon name="pen" />
         </span>
         碎碎念
       </h2>
@@ -27,51 +25,25 @@ import { site } from '../../site.config.mjs';
         <label for="bits-draft-content">正文内容</label>
         <div class="bits-draft-toolbar" data-bits-draft-toolbar role="toolbar" aria-label="常用格式">
           <button type="button" class="bits-draft-tool" data-action="bold" data-tip="加粗" aria-label="加粗">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M6 4h8a4 4 0 0 1 0 8H6z" />
-              <path d="M6 12h9a4 4 0 0 1 0 8H6z" />
-            </svg>
+            <Icon name="bold" />
           </button>
           <button type="button" class="bits-draft-tool" data-action="italic" data-tip="斜体" aria-label="斜体">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <line x1="19" y1="4" x2="10" y2="4" />
-              <line x1="14" y1="20" x2="5" y2="20" />
-              <line x1="15" y1="4" x2="9" y2="20" />
-            </svg>
+            <Icon name="italic" />
           </button>
           <button type="button" class="bits-draft-tool" data-action="code" data-tip="行内代码" aria-label="行内代码">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <polyline points="16 18 22 12 16 6" />
-              <polyline points="8 6 2 12 8 18" />
-            </svg>
+            <Icon name="code" />
           </button>
           <button type="button" class="bits-draft-tool" data-action="quote" data-tip="引用" aria-label="引用">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M3 21c3 0 6-1 6-4v-6c0-3-3-4-6-4v4c1 0 2 1 2 2v4H3z" />
-              <path d="M15 21c3 0 6-1 6-4v-6c0-3-3-4-6-4v4c1 0 2 1 2 2v4h-2z" />
-            </svg>
+            <Icon name="quote" />
           </button>
           <button type="button" class="bits-draft-tool" data-action="list" data-tip="列表" aria-label="列表">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <line x1="8" y1="6" x2="21" y2="6" />
-              <line x1="8" y1="12" x2="21" y2="12" />
-              <line x1="8" y1="18" x2="21" y2="18" />
-              <line x1="3" y1="6" x2="3.01" y2="6" />
-              <line x1="3" y1="12" x2="3.01" y2="12" />
-              <line x1="3" y1="18" x2="3.01" y2="18" />
-            </svg>
+            <Icon name="list" />
           </button>
           <button type="button" class="bits-draft-tool" data-action="link" data-tip="链接" aria-label="链接">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M10 13a5 5 0 0 1 7 0l1 1a5 5 0 0 1-7 7l-1-1" />
-              <path d="M14 11a5 5 0 0 1-7 0l-1-1a5 5 0 0 1 7-7l1 1" />
-            </svg>
+            <Icon name="link" />
           </button>
           <button type="button" class="bits-draft-tool" data-action="paragraph" data-tip="段落" aria-label="段落">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M20 5v6a4 4 0 0 1-4 4H5" />
-              <path d="M9 9l-4 4 4 4" />
-            </svg>
+            <Icon name="paragraph" />
           </button>
         </div>
       </div>
@@ -96,10 +68,7 @@ import { site } from '../../site.config.mjs';
       <div class="bits-draft-field bits-draft-half">
         <label for="bits-draft-place" class="bits-draft-label">
           <span class="bits-draft-label-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path d="M12 21s7-6.2 7-11a7 7 0 0 0-14 0c0 4.8 7 11 7 11Z" />
-              <circle cx="12" cy="10" r="2.5" />
-            </svg>
+            <Icon name="map-pin" />
           </span>
           地点（可选）
         </label>
@@ -187,16 +156,11 @@ import { site } from '../../site.config.mjs';
       <div class="bits-draft-link-row">
         <button class="bits-draft-link" type="button" data-bits-manual-open hidden>
           <span class="bits-draft-link-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6S2 12 2 12Z" />
-              <circle cx="12" cy="12" r="3" />
-            </svg>
+            <Icon name="eye" />
           </span>
           <span>预览草稿</span>
           <span class="bits-draft-link-caret" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <polyline points="6 9 12 15 18 9" />
-            </svg>
+            <Icon name="chevron-down" />
           </span>
         </button>
       </div>
@@ -213,10 +177,7 @@ import { site } from '../../site.config.mjs';
       <div class="bits-identity-bar" data-identity-bar>
         <div class="bits-identity-caption">
           <span class="bits-identity-label-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <circle cx="12" cy="8" r="3.4" />
-              <path d="M4.5 20c1.6-3 5-4.6 7.5-4.6s5.9 1.6 7.5 4.6" />
-            </svg>
+            <Icon name="user-circle" />
           </span>
           <span>作者（可选）</span>
         </div>
